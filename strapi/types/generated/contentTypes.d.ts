@@ -362,31 +362,34 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiArtigoArtigo extends Schema.CollectionType {
-  collectionName: 'artigos';
+export interface ApiFilmeFilme extends Schema.CollectionType {
+  collectionName: 'filmes';
   info: {
-    singularName: 'artigo';
-    pluralName: 'artigos';
-    displayName: 'Artigo';
+    singularName: 'filme';
+    pluralName: 'filmes';
+    displayName: 'filme';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     titulo: Attribute.String;
-    conteudo: Attribute.Text;
-    capa: Attribute.Media;
+    descricao: Attribute.String;
+    temporada: Attribute.String;
+    imagem_capa: Attribute.Media;
+    idioma: Attribute.String;
+    avaliacoes: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::artigo.artigo',
+      'api::filme.filme',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::artigo.artigo',
+      'api::filme.filme',
       'oneToOne',
       'admin::user'
     > &
@@ -719,7 +722,7 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::artigo.artigo': ApiArtigoArtigo;
+      'api::filme.filme': ApiFilmeFilme;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;

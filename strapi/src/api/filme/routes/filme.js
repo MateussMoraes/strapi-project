@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * artigo router
+ * filme router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::artigo.artigo');
+module.exports = createCoreRouter('api::filme.filme');

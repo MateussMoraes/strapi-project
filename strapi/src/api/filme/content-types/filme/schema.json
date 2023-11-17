@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "filmes",
+  "info": {
+    "singularName": "filme",
+    "pluralName": "filmes",
+    "displayName": "filme"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titulo": {
+      "type": "string"
+    },
+    "descricao": {
+      "type": "string"
+    },
+    "temporada": {
+      "type": "string"
+    },
+    "imagem_capa": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "idioma": {
+      "type": "string"
+    },
+    "avaliacoes": {
+      "type": "integer"
+    }
+  }
+}
