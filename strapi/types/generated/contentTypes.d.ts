@@ -362,41 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiFilmeFilme extends Schema.CollectionType {
-  collectionName: 'filmes';
-  info: {
-    singularName: 'filme';
-    pluralName: 'filmes';
-    displayName: 'filme';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    titulo: Attribute.String;
-    descricao: Attribute.String;
-    temporada: Attribute.String;
-    imagem_capa: Attribute.Media;
-    idioma: Attribute.String;
-    avaliacoes: Attribute.Integer;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::filme.filme',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::filme.filme',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -712,6 +677,188 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiFilmeFilme extends Schema.CollectionType {
+  collectionName: 'filmes';
+  info: {
+    singularName: 'filme';
+    pluralName: 'filmes';
+    displayName: 'filme';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    titulo: Attribute.String;
+    temporadas: Attribute.Integer;
+    idade: Attribute.Integer;
+    descricao: Attribute.Text;
+    imagem_capa: Attribute.Media;
+    imagens: Attribute.Media;
+    elenco_imagens: Attribute.Media;
+    idioma: Attribute.Relation<
+      'api::filme.filme',
+      'oneToOne',
+      'api::idioma.idioma'
+    >;
+    palavra_chaves: Attribute.Relation<
+      'api::filme.filme',
+      'oneToMany',
+      'api::palavra-chave.palavra-chave'
+    >;
+    plataforma_filmes: Attribute.Relation<
+      'api::filme.filme',
+      'oneToMany',
+      'api::plataforma-filme.plataforma-filme'
+    >;
+    imagem_fundo: Attribute.Media;
+    genero_filmes: Attribute.Relation<
+      'api::filme.filme',
+      'oneToMany',
+      'api::genero-filme.genero-filme'
+    >;
+    avaliacoes_positivas: Attribute.BigInteger;
+    avaliacoes_negativas: Attribute.BigInteger;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::filme.filme',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::filme.filme',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiGeneroFilmeGeneroFilme extends Schema.CollectionType {
+  collectionName: 'genero_filmes';
+  info: {
+    singularName: 'genero-filme';
+    pluralName: 'genero-filmes';
+    displayName: 'genero_filme';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nome: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::genero-filme.genero-filme',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::genero-filme.genero-filme',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiIdiomaIdioma extends Schema.CollectionType {
+  collectionName: 'idiomas';
+  info: {
+    singularName: 'idioma';
+    pluralName: 'idiomas';
+    displayName: 'idioma';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nome: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::idioma.idioma',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::idioma.idioma',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPalavraChavePalavraChave extends Schema.CollectionType {
+  collectionName: 'palavra_chaves';
+  info: {
+    singularName: 'palavra-chave';
+    pluralName: 'palavra-chaves';
+    displayName: 'palavra_chave';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nome: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::palavra-chave.palavra-chave',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::palavra-chave.palavra-chave',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPlataformaFilmePlataformaFilme
+  extends Schema.CollectionType {
+  collectionName: 'plataforma_filmes';
+  info: {
+    singularName: 'plataforma-filme';
+    pluralName: 'plataforma-filmes';
+    displayName: 'plataforma_filme';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nome: Attribute.String;
+    logo: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::plataforma-filme.plataforma-filme',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::plataforma-filme.plataforma-filme',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -722,13 +869,17 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::filme.filme': ApiFilmeFilme;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::filme.filme': ApiFilmeFilme;
+      'api::genero-filme.genero-filme': ApiGeneroFilmeGeneroFilme;
+      'api::idioma.idioma': ApiIdiomaIdioma;
+      'api::palavra-chave.palavra-chave': ApiPalavraChavePalavraChave;
+      'api::plataforma-filme.plataforma-filme': ApiPlataformaFilmePlataformaFilme;
     }
   }
 }

@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "genero_filmes",
+  "info": {
+    "singularName": "genero-filme",
+    "pluralName": "genero-filmes",
+    "displayName": "genero_filme"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome": {
+      "type": "string"
+    }
+  }
+}

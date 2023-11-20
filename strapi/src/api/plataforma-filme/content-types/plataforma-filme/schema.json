@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "plataforma_filmes",
+  "info": {
+    "singularName": "plataforma-filme",
+    "pluralName": "plataforma-filmes",
+    "displayName": "plataforma_filme"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome": {
+      "type": "string"
+    },
+    "logo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

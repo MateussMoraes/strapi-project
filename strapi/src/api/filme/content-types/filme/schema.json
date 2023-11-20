@@ -4,7 +4,8 @@
   "info": {
     "singularName": "filme",
     "pluralName": "filmes",
-    "displayName": "filme"
+    "displayName": "filme",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,27 +15,84 @@
     "titulo": {
       "type": "string"
     },
-    "descricao": {
-      "type": "string"
+    "temporadas": {
+      "type": "integer"
     },
-    "temporada": {
-      "type": "string"
+    "idade": {
+      "type": "integer"
+    },
+    "descricao": {
+      "type": "text"
     },
     "imagem_capa": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
+      ]
+    },
+    "imagens": {
       "type": "media",
-      "multiple": true
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "elenco_imagens": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "idioma": {
-      "type": "string"
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::idioma.idioma"
     },
-    "avaliacoes": {
-      "type": "integer"
+    "palavra_chaves": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::palavra-chave.palavra-chave"
+    },
+    "plataforma_filmes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::plataforma-filme.plataforma-filme"
+    },
+    "imagem_fundo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "genero_filmes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::genero-filme.genero-filme"
+    },
+    "avaliacoes_positivas": {
+      "type": "biginteger"
+    },
+    "avaliacoes_negativas": {
+      "type": "biginteger"
     }
   }
 }

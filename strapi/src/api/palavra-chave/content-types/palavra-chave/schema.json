@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "palavra_chaves",
+  "info": {
+    "singularName": "palavra-chave",
+    "pluralName": "palavra-chaves",
+    "displayName": "palavra_chave"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,153 @@
+.containerPrincipal {
+  width: 100%;
+  overflow: hidden;
+}
+
+.containerInfosSize {
+  width: 100%;
+  height: 750px;
+  position: relative;
+}
+
+.containerInfos {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.infos {
+  display: flex;
+  gap: 2rem;
+  position: relative;
+}
+
+.imgFundo {
+  position: absolute;
+  opacity: .3;
+  height: inherit;
+  width: 100%;
+  min-width: 1440px;
+}
+
+.imgCapa {
+  width: 440px;
+  height: 655px;
+  margin: 3rem;
+}
+
+.containerTituloTemporadaGeneroIdade {
+  display: flex;
+  flex-direction: column;
+}
+
+.containerTituloTemporada {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.containerIdadeGenero {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.idade {
+  border: 1px solid var(--black);
+  padding: 3px;
+}
+
+.containerGenero {
+  display: flex;
+  gap: 6px;
+}
+
+.containerAvaliacao {
+  display: flex;
+  flex-direction: column;
+}
+
+.containerProgressResult {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progressAvaliacao {
+  background-color: green;
+  height: 10px;
+}
+
+.containerPalavrasChaves {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.palavraChave {
+  background-color: lightgray;
+  border-radius: 4px;
+  padding: 3px;
+}
+
+.imagens {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.containerImagens {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.imagem {
+  width: 365px;
+  height: 205px;
+}
+
+.elenco {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.containerElencoImagens {
+  width: 90%;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  overflow-x: auto;
+}
+
+.imagemElenco {
+  width: 138px;
+  height: 175px;
+}
+
+@media (max-width: 1220px) {
+  .containerImagens {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .infos {
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+  }
+}
+
+@media (max-width: 800px) {
+  .containerImagens {
+    grid-template-columns: 1fr;
+  }
+}
