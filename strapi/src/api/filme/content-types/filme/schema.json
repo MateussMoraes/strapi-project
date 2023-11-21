@@ -62,11 +62,6 @@
       "relation": "oneToOne",
       "target": "api::idioma.idioma"
     },
-    "palavra_chaves": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::palavra-chave.palavra-chave"
-    },
     "plataforma_filmes": {
       "type": "relation",
       "relation": "oneToMany",
@@ -93,6 +88,10 @@
     },
     "avaliacoes_negativas": {
       "type": "biginteger"
+    },
+    "palavras_chaves": {
+      "type": "customField",
+      "customField": "plugin::tagsinput.tags"
     }
   }
 }

@@ -12,7 +12,7 @@ export default function FilmeId() {
 
   useEffect(() => {
     if (router.query.id) {
-      axios.get(`http://localhost:1337/api/filmes/${router.query.id}?populate=*`)
+      axios.get(`http://localhost:1337/api/filmes/${router.query.id}?populate[plataforma_filmes][populate]=*&populate[genero_filmes][populate]=*&populate[idioma]=*&populate[imagem_capa]=*&populate[imagem_fundo]=*&populate[imagens]=*&populate[elenco_imagens]=*`)
         .then((res) => setFilme(res.data.data))
         .catch((error) => console.log(error))
     }
@@ -29,10 +29,10 @@ export default function FilmeId() {
       <main className={styles.containerPrincipal}>
 
         <section className={styles.containerInfosSize}>
-          <img className={styles.imgFundo} src={"http://localhost:1337" + filme.attributes.imagem_fundo.data.attributes.url} alt="" />
+          <img className={styles.imgFundo} src={"http://localhost:1337" + filme.attributes?.imagem_fundo.data.attributes.url} alt="" />
 
           <div className={styles.infos}>
-            <img className={styles.imgCapa} src={"http://localhost:1337" + filme.attributes.imagem_capa.data.attributes.url} alt="" />
+            <img className={styles.imgCapa} src={"http://localhost:1337" + filme.attributes?.imagem_capa.data.attributes.url} alt="" />
 
             <div className={styles.containerInfos}>
               <div className={styles.containerTituloTemporadaGeneroIdade}>
@@ -68,14 +68,13 @@ export default function FilmeId() {
 
               <div className={styles.containerPalavrasChaves}>
                 <p><strong>Palavras chaves: </strong></p>
-                {filme.attributes?.palavra_chaves.data.map((palavra) => (
-                  <p className={styles.palavraChave} key={palavra.id}>{palavra.attributes.nome}</p>
+                {filme.attributes?.palavras_chaves.map((palavra) => (
+                  <p className={styles.palavraChave} key={palavra.id}>{palavra.name}</p>
                 ))}
               </div>
 
               <div className={styles.containerOndeAssistir}>
                 <p><strong>Onde assistir: </strong></p>
-                { }
               </div>
             </div>
           </div>
@@ -86,7 +85,7 @@ export default function FilmeId() {
 
           <div className={styles.containerImagens}>
             {filme.attributes?.imagens.data.map((imagem) => (
-              <img className={styles.imagem} src={"http://localhost:1337" + imagem.attributes.url} alt="" />
+              <img key={imagem.id} className={styles.imagem} src={"http://localhost:1337" + imagem.attributes.url} alt="" />
             ))}
           </div>
         </section>
@@ -96,7 +95,7 @@ export default function FilmeId() {
 
           <div className={styles.containerElencoImagens}>
             {filme.attributes?.elenco_imagens.data.map((imagem) => (
-              <img className={styles.imagemElenco} src={"http://localhost:1337" + imagem.attributes.url} alt="" />
+              <img key={imagem.id} className={styles.imagemElenco} src={"http://localhost:1337" + imagem.attributes.url} alt="" />
             ))}
           </div>
         </section>

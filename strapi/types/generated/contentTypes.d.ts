@@ -482,6 +482,50 @@ export interface PluginUploadFolder extends Schema.CollectionType {
   };
 }
 
+export interface PluginI18NLocale extends Schema.CollectionType {
+  collectionName: 'i18n_locale';
+  info: {
+    singularName: 'locale';
+    pluralName: 'locales';
+    collectionName: 'locales';
+    displayName: 'Locale';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 50;
+      }>;
+    code: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUsersPermissionsPermission
   extends Schema.CollectionType {
   collectionName: 'up_permissions';
@@ -633,50 +677,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginI18NLocale extends Schema.CollectionType {
-  collectionName: 'i18n_locale';
-  info: {
-    singularName: 'locale';
-    pluralName: 'locales';
-    collectionName: 'locales';
-    displayName: 'Locale';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 50;
-      }>;
-    code: Attribute.String & Attribute.Unique;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiFilmeFilme extends Schema.CollectionType {
   collectionName: 'filmes';
   info: {
@@ -701,11 +701,6 @@ export interface ApiFilmeFilme extends Schema.CollectionType {
       'oneToOne',
       'api::idioma.idioma'
     >;
-    palavra_chaves: Attribute.Relation<
-      'api::filme.filme',
-      'oneToMany',
-      'api::palavra-chave.palavra-chave'
-    >;
     plataforma_filmes: Attribute.Relation<
       'api::filme.filme',
       'oneToMany',
@@ -719,6 +714,8 @@ export interface ApiFilmeFilme extends Schema.CollectionType {
     >;
     avaliacoes_positivas: Attribute.BigInteger;
     avaliacoes_negativas: Attribute.BigInteger;
+    palavras_chaves: Attribute.JSON &
+      Attribute.CustomField<'plugin::tagsinput.tags'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -797,36 +794,6 @@ export interface ApiIdiomaIdioma extends Schema.CollectionType {
   };
 }
 
-export interface ApiPalavraChavePalavraChave extends Schema.CollectionType {
-  collectionName: 'palavra_chaves';
-  info: {
-    singularName: 'palavra-chave';
-    pluralName: 'palavra-chaves';
-    displayName: 'palavra_chave';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    nome: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::palavra-chave.palavra-chave',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::palavra-chave.palavra-chave',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiPlataformaFilmePlataformaFilme
   extends Schema.CollectionType {
   collectionName: 'plataforma_filmes';
@@ -871,14 +838,13 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
+      'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::i18n.locale': PluginI18NLocale;
       'api::filme.filme': ApiFilmeFilme;
       'api::genero-filme.genero-filme': ApiGeneroFilmeGeneroFilme;
       'api::idioma.idioma': ApiIdiomaIdioma;
-      'api::palavra-chave.palavra-chave': ApiPalavraChavePalavraChave;
       'api::plataforma-filme.plataforma-filme': ApiPlataformaFilmePlataformaFilme;
     }
   }
