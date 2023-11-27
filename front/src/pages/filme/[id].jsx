@@ -12,13 +12,15 @@ export default function FilmeId() {
 
   useEffect(() => {
     if (router.query.id) {
-      axios.get(`http://localhost:1337/api/filmes/${router.query.id}?populate[plataforma_filmes][populate]=*&populate[genero_filmes][populate]=*&populate[idioma]=*&populate[imagem_capa]=*&populate[imagem_fundo]=*&populate[imagens]=*&populate[elenco_imagens]=*`)
+      axios.get(`http://localhost:1337/api/filmes/${router.query.id}?populate=deep`)
         .then((res) => setFilme(res.data.data))
         .catch((error) => console.log(error))
     }
   }, [router])
 
   console.log(filme)
+
+  // 
 
   if (filme) return (
     <>
@@ -36,7 +38,7 @@ export default function FilmeId() {
 
             <div className={styles.containerInfos}>
               <div className={styles.containerTituloTemporadaGeneroIdade}>
-                <div className={styles.containerTituloTemporada}>
+                <div className={styles.containerTituloTemporada}>d
                   <h1>{filme.attributes.titulo}</h1>
                   <p>{filme.attributes?.temporadas ? filme.attributes.temporadas + " temporadas" : ""}</p>
                 </div>
@@ -68,8 +70,8 @@ export default function FilmeId() {
 
               <div className={styles.containerPalavrasChaves}>
                 <p><strong>Palavras chaves: </strong></p>
-                {filme.attributes?.palavras_chaves.map((palavra) => (
-                  <p className={styles.palavraChave} key={palavra.id}>{palavra.name}</p>
+                {filme.attributes?.palavras_chaves.data.map((palavra) => (
+                  <p className={styles.palavraChave} key={palavra.id}>{palavra.attributes.palavra}</p>
                 ))}
               </div>
 
@@ -94,8 +96,11 @@ export default function FilmeId() {
           <h2>Elenco</h2>
 
           <div className={styles.containerElencoImagens}>
-            {filme.attributes?.elenco_imagens.data.map((imagem) => (
-              <img key={imagem.id} className={styles.imagemElenco} src={"http://localhost:1337" + imagem.attributes.url} alt="" />
+            {filme.attributes?.filme_atores.data.map((ator) => (
+              <>
+              <img key={ator.id} className={styles.imagemElenco} src={"http://localhost:1337" + ator.ator.data[0].attributes.url} />
+              
+              </>
             ))}
           </div>
         </section>

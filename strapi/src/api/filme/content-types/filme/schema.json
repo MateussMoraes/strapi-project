@@ -46,17 +46,6 @@
         "audios"
       ]
     },
-    "elenco_imagens": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "idioma": {
       "type": "relation",
       "relation": "oneToOne",
@@ -89,9 +78,15 @@
     "avaliacoes_negativas": {
       "type": "biginteger"
     },
+    "filme_atores": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::filme-ator.filme-ator"
+    },
     "palavras_chaves": {
-      "type": "customField",
-      "customField": "plugin::tagsinput.tags"
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::palavras-chave.palavras-chave"
     }
   }
 }

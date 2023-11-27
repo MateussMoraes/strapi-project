@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "atores",
+  "info": {
+    "singularName": "ator",
+    "pluralName": "atores",
+    "displayName": "ator",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome": {
+      "type": "string"
+    },
+    "imagem": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

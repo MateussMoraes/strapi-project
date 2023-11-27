@@ -677,6 +677,30 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAtorAtor extends Schema.CollectionType {
+  collectionName: 'atores';
+  info: {
+    singularName: 'ator';
+    pluralName: 'atores';
+    displayName: 'ator';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nome: Attribute.String;
+    imagem: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::ator.ator', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::ator.ator', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiFilmeFilme extends Schema.CollectionType {
   collectionName: 'filmes';
   info: {
@@ -695,7 +719,6 @@ export interface ApiFilmeFilme extends Schema.CollectionType {
     descricao: Attribute.Text;
     imagem_capa: Attribute.Media;
     imagens: Attribute.Media;
-    elenco_imagens: Attribute.Media;
     idioma: Attribute.Relation<
       'api::filme.filme',
       'oneToOne',
@@ -714,8 +737,16 @@ export interface ApiFilmeFilme extends Schema.CollectionType {
     >;
     avaliacoes_positivas: Attribute.BigInteger;
     avaliacoes_negativas: Attribute.BigInteger;
-    palavras_chaves: Attribute.JSON &
-      Attribute.CustomField<'plugin::tagsinput.tags'>;
+    filme_atores: Attribute.Relation<
+      'api::filme.filme',
+      'oneToMany',
+      'api::filme-ator.filme-ator'
+    >;
+    palavras_chaves: Attribute.Relation<
+      'api::filme.filme',
+      'oneToMany',
+      'api::palavras-chave.palavras-chave'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -727,6 +758,46 @@ export interface ApiFilmeFilme extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::filme.filme',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFilmeAtorFilmeAtor extends Schema.CollectionType {
+  collectionName: 'filme_atores';
+  info: {
+    singularName: 'filme-ator';
+    pluralName: 'filme-atores';
+    displayName: 'filme_ator';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nome_fantasia: Attribute.String;
+    ator: Attribute.Relation<
+      'api::filme-ator.filme-ator',
+      'oneToMany',
+      'api::ator.ator'
+    >;
+    filme: Attribute.Relation<
+      'api::filme-ator.filme-ator',
+      'oneToMany',
+      'api::filme.filme'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::filme-ator.filme-ator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::filme-ator.filme-ator',
       'oneToOne',
       'admin::user'
     > &
@@ -794,6 +865,36 @@ export interface ApiIdiomaIdioma extends Schema.CollectionType {
   };
 }
 
+export interface ApiPalavrasChavePalavrasChave extends Schema.CollectionType {
+  collectionName: 'palavras_chaves';
+  info: {
+    singularName: 'palavras-chave';
+    pluralName: 'palavras-chaves';
+    displayName: 'palavras_chave';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    palavra: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::palavras-chave.palavras-chave',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::palavras-chave.palavras-chave',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPlataformaFilmePlataformaFilme
   extends Schema.CollectionType {
   collectionName: 'plataforma_filmes';
@@ -842,9 +943,12 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::ator.ator': ApiAtorAtor;
       'api::filme.filme': ApiFilmeFilme;
+      'api::filme-ator.filme-ator': ApiFilmeAtorFilmeAtor;
       'api::genero-filme.genero-filme': ApiGeneroFilmeGeneroFilme;
       'api::idioma.idioma': ApiIdiomaIdioma;
+      'api::palavras-chave.palavras-chave': ApiPalavrasChavePalavrasChave;
       'api::plataforma-filme.plataforma-filme': ApiPlataformaFilmePlataformaFilme;
     }
   }

@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "filme_atores",
+  "info": {
+    "singularName": "filme-ator",
+    "pluralName": "filme-atores",
+    "displayName": "filme_ator"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome_fantasia": {
+      "type": "string"
+    },
+    "ator": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ator.ator"
+    },
+    "filme": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::filme.filme"
+    }
+  }
+}
